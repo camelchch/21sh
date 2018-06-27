@@ -1,6 +1,17 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_prompt_open_quote.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:52:52 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:54:54 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-//the case '\\\' is not yet totally done
+#include "twenty_one.h"
+
 static int			open_quote_exit(char *line)
 {
 	int		i;
@@ -13,7 +24,8 @@ static int			open_quote_exit(char *line)
 	{
 		if (line[i] == '"' && open_squote < 0 && dslash_before(line, i))
 			open_dquote = -open_dquote;
-		else if (line[i] == '\'' && open_dquote < 0 && !(!dslash_before(line, i) && open_squote < 0))
+		else if (line[i] == '\'' && open_dquote < 0 && \
+				!(!dslash_before(line, i) && open_squote < 0))
 			open_squote = -open_squote;
 		else if (line[i] == '\\' && open_dquote < 0 && open_squote < 0 && \
 				dslash_before(line, i) && !line[i + 1])

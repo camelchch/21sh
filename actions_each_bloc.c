@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   actions_each_bloc.c                                :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:47:19 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:47:49 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <errno.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -74,7 +86,7 @@ int			actions_each_bloc(t_word *list, char ***env, t_sh *table)
 		{
 			if ((nb_pid[i] = fork()) == 0)
 				(do_all_redirection(list, pipe_fd, nb_pipe, i)) ? exit(0) :\
-					do_child_pro(list, pro[i].pro_args, *env, table);
+					do_child_pro(pro[i].pro_args, *env, table);
 		}
 		list = close_fd_mv_list(list, i , pipe_fd, nb_pipe);
 	}

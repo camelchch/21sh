@@ -1,6 +1,18 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   set_unset_env.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:20:31 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:23:05 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
+#include "twenty_one.h"
 
 int		nb_str(char **paras)
 {
@@ -40,23 +52,18 @@ static char	**add_env(char ***env, char **paras)
 
 static char	**delet_env(char **env, int index)
 {
-//	char	*temp;
 	int		after;
 	char	**temp;
 
-	//put_env(*env);
 	temp = env;
 	free(temp[index]);
 	while (index < nb_str(env) - 1)
 	{
-	//	temp = *cp;
 		after = index + 1;
 		temp[index++] = temp[after];
-//		free(temp);
 	}
 	temp[nb_str(env) - 1] = NULL;
 	return (temp);
-//	free(cp);
 }
 
 char		**set_env(char **paras, char ***env)
@@ -68,7 +75,9 @@ char		**set_env(char **paras, char ***env)
 	paras++;
 	if (!*paras || !*(paras + 1))
 		return (*env);
-	while (*cp && *paras && !(!ft_strncmp(*paras, *cp, ft_strlen(*paras)) && ft_strlen(*paras) < ft_strlen(*cp) && (*cp)[ft_strlen(*paras)] == '='))
+	while (*cp && *paras && !(!ft_strncmp(*paras, *cp, ft_strlen(*paras)) &&\
+				ft_strlen(*paras) < ft_strlen(*cp) && \
+				(*cp)[ft_strlen(*paras)] == '='))
 		cp++;
 	if (*cp)
 	{
@@ -86,7 +95,6 @@ char		**set_env(char **paras, char ***env)
 char	**unset_env(char **paras, char **env)
 {
 	char	**cp;
-//	char	*temp;
 	int		index;
 
 	cp = env;
@@ -94,7 +102,9 @@ char	**unset_env(char **paras, char **env)
 	paras++;
 	if (!*paras)
 		return (env);
-	while (*cp && !(!ft_strncmp(*paras, *cp, ft_strlen(*paras)) && ft_strlen(*paras) < ft_strlen(*cp) && (*cp)[ft_strlen(*paras)] == '='))
+	while (*cp && !(!ft_strncmp(*paras, *cp, ft_strlen(*paras)) && \
+				ft_strlen(*paras) < ft_strlen(*cp) && \
+				(*cp)[ft_strlen(*paras)] == '='))
 	{
 		cp++;
 		index++;
@@ -102,6 +112,6 @@ char	**unset_env(char **paras, char **env)
 	if (*cp)
 		env = delet_env(env,  index);
 	else
-		ft_printf("no such variable %s\n", *paras);
+		put2_str_fd(*paras, " :no such variable %s\n", 2);
 	return (env);
 }

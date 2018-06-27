@@ -1,14 +1,18 @@
-#include <termios.h>
-#include <stdio.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_mv_left_right.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:50:31 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:50:55 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <curses.h>
 #include <term.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <sys/uio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <signal.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 int		move_left(t_line *line)
 {

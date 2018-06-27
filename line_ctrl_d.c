@@ -1,8 +1,17 @@
-#include <unistd.h>
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_ctrl_d.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:43:52 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:45:19 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include <curses.h>
-#include <term.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 int			delete_at_position(t_line *line)
 {

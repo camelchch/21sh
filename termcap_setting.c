@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   termcap_setting.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:35:39 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <termios.h>
 #include <stdio.h>
 #include <curses.h>
@@ -8,23 +20,7 @@
 #include <unistd.h>
 #include <fcntl.h>
 #include <signal.h>
-#include "minishell.h"
-/*
-static int	raw_termi_mode()
-{
-	struct	termios	tattr;
-
-	tcgetattr(STDIN_FILENO, &tattr);
-	tattr.c_lflag &= ~(ECHO | ICANON | ISIG);
-	tattr.c_oflag &= ~(OPOST);
-	tattr.c_cc[VMIN] = 1;
-	tattr.c_cc[VTIME] = 0;
-	tcsetattr(STDIN_FILENO, TCSADRAIN,&tattr);
-	if (tgetent(NULL, getenv("TERM")) != 1)
-			return (-1);
-	return (0);
-}
-*/
+#include "twenty_one.h"
 
 static void	default_termi_mode()
 {
@@ -36,7 +32,18 @@ static void	default_termi_mode()
 	tcsetattr(STDIN_FILENO, TCSADRAIN,&tattr);
 }
 
-int		init_attr(int mod)
+static void	for_attr(struct termios *new, struct termios old)
+{
+		*new = old;
+		new->c_lflag &= ~(ECHO | ICANON);
+		new->c_lflag |= ISIG;
+		new->c_oflag &= ~(OPOST);
+		new->c_cc[VMIN] = 1;
+		new->c_cc[VTIME] = 0;
+		tcsetattr(STDIN_FILENO, TCSADRAIN, new);
+}
+
+int			init_attr(int mod)
 {
 	static struct	termios old;
 	static int				oldatt = 0;
@@ -50,14 +57,7 @@ int		init_attr(int mod)
 	}
 	if (mod == SETNEW)
 	{
-		new = old;
-		new.c_lflag &= ~(ECHO | ICANON);
-		new.c_lflag |= ISIG;
-		new.c_oflag &= ~(OPOST);
-		new.c_cc[VMIN] = 1;
-		new.c_cc[VTIME] = 0;
-		//		new.c_cc[VTNTR] = 1;
-		tcsetattr(STDIN_FILENO, TCSADRAIN, &new);
+		for_attr(&new, old);
 	if (tgetent(NULL, getenv("TERM")) != 1)
 	{
 		default_termi_mode();
@@ -65,7 +65,6 @@ int		init_attr(int mod)
 	}
 	}
 	else
-		//tcsetattr(STDIN_FILENO, TCSADRAIN, &old);
 		default_termi_mode();
 	return (0);
 }

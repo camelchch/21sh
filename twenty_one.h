@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:26:55 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 14:30:38 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/27 17:46:04 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -179,7 +179,6 @@ void		shell(int ac, char **av, char **env, t_sh *table);
 void		each_cmdline(char *cmdline, char **env, t_sh *table);
 void		pipes(char *cmdline, int nb_pipe, char ***env, t_sh *table);
 int			no_pipe(char *cmdline);
-void		signal_quith(int sign);
 
 //termcap_setting.c
 int		init_attr(int mod);
@@ -392,7 +391,7 @@ int				err_open_file(t_word *list);
 
 //child_program.c
 void		child_pro_bin(char **paras, char **env, t_sh *table);
-void		do_child_pro(t_word *list, char **paras, char **env, t_sh *table);
+void		do_child_pro(char **paras, char **env, t_sh *table);
 char		*path_in_sh(char *app, t_sh *table);
 
 //actions_each_line.c
@@ -427,7 +426,6 @@ void		free_saver_fd(t_save_fd *recover);
 
 //signal.c
 void		signal_inh(int sign);
-void		signal_quith(int sign);
 
 //my_free.c
 void		ft_freestrstr(char **cp_env);

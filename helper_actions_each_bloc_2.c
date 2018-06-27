@@ -1,8 +1,8 @@
 #include <stdlib.h>
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
-void	init_int_table(int *table, int len)
+void		init_int_table(int *table, int len)
 {
 	int		i;
 
@@ -24,7 +24,7 @@ void		do_all_pipe(int *pipe_fd, int nb_pipe)
 	}
 }
 
-int		pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table)
+int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table)
 {
 	char		**pro_args;
 	t_save_fd	*recover;

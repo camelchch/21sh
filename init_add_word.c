@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_add_word.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:39:38 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:39:42 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 t_word		*malloc_add(void)
 {
@@ -12,7 +24,7 @@ t_word		*malloc_add(void)
 	return (add);
 }
 
-static void		init_vari_for_add_word(t_word **add, int *only_nb, int *j)
+static void	init_vari_for_add_word(t_word **add, int *only_nb, int *j)
 {
 
 	open_dquote = -1;
@@ -22,7 +34,7 @@ static void		init_vari_for_add_word(t_word **add, int *only_nb, int *j)
 	*j = 0;
 }
 
-static void		for_add_word(int only_nb, char *line, int *i, t_word *add)
+static void	for_add_word(int only_nb, char *line, int *i, t_word *add)
 {
 	if (only_nb && (line[*i] == '<' || line[*i] == '>'))
 		add->type = FD;
@@ -30,7 +42,7 @@ static void		for_add_word(int only_nb, char *line, int *i, t_word *add)
 		add->type = PROGRAM;
 }
 
-static void		change(char *line, int *i, int *only_nb)
+static void	change(char *line, int *i, int *only_nb)
 {
 	if (line[*i] < '0' || line[*i] > '9')
 		*only_nb = 0;
@@ -40,7 +52,6 @@ static void		change(char *line, int *i, int *only_nb)
 		open_dquote = -open_squote;
 }
 
-// in this func j don't need to be passed in args
 t_word		*init_add_word(char *line, int *i, int *j)
 {
 	t_word	*add;

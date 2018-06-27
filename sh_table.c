@@ -5,16 +5,16 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 15:43:03 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/25 17:21:45 by saxiao           ###   ########.fr       */
+/*   Created: 2018/06/27 17:23:38 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:24:28 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <dirent.h>
 #include <stdlib.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
-char	*ft_getenv(char **env, char *nm)
+char		*ft_getenv(char **env, char *nm)
 {
 
 	while (env && *env)
@@ -27,7 +27,7 @@ char	*ft_getenv(char **env, char *nm)
 	return (NULL);
 }
 
-char	**path(char **env)
+char		**path(char **env)
 {
 	while (env && *env)
 	{
@@ -38,7 +38,7 @@ char	**path(char **env)
 	return (NULL);
 }
 
-int		calcu_index(char *name)
+int			calcu_index(char *name)
 {
 	int		cal;
 	int		i;
@@ -66,7 +66,7 @@ static void	addin_table(t_sh *table, t_table *add, int index)
 		}
 }
 
-void	init_shtable(t_sh *table, char **path)
+void		init_shtable(t_sh *table, char **path)
 {
 	DIR				*dirp;
 	struct dirent	*dir;

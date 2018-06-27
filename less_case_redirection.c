@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   less_case_redirection.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:40:28 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:40:49 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <errno.h>
 #include <fcntl.h>
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 int		err_open_file(t_word *list)
 {

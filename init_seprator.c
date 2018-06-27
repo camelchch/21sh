@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init_seprator.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:39:18 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:39:26 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "twenty_one.h"
 
 static void		less_and(char *line, int *index, t_word *add)
 {
@@ -16,7 +28,7 @@ static void		less_and(char *line, int *index, t_word *add)
 	}
 }
 
-static t_word		*less_type(char *line, int *index)
+static t_word	*less_type(char *line, int *index)
 {
 	t_word		*add;
 
@@ -54,7 +66,7 @@ static void		great_and(char *line, int *index, t_word *add)
 	}
 }
 
-static t_word		*great_type(char *line, int *index)
+static t_word	*great_type(char *line, int *index)
 {
 	t_word		*add;
 

@@ -1,4 +1,16 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rm_quoting_in_word.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:19:35 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:20:16 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "twenty_one.h"
 
 static void	init_vari_for(t_helper *help, char *cp, char *vari, char *word)
 {
@@ -41,7 +53,6 @@ static void	case_squote(t_helper *help, char *cp, char *word)
 
 static void	other_case(t_helper *help, char *cp, char *word)
 {
-//	if (!(cp[help->i] == '\\' && !dslash_before(cp, help->i) && open_squote < 0))
 	 if (open_dquote < 0 && open_squote < 0 && help->i - 1 >= 0 && \
 			cp[help->i - 1] == '\\' && dslash_before(cp, help->i - 1))
 		word[help->index - 1] = cp[help->i];

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   child_program.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:46:30 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:46:32 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include <stdlib.h>
 #include "twenty_one.h"
@@ -47,7 +59,7 @@ static void	child_pro_buildin(char **paras, char **env, t_sh *table)
 	exit(0);
 }
 
-void		do_child_pro(t_word *list, char **paras, char **env, t_sh *table)
+void		do_child_pro(char **paras, char **env, t_sh *table)
 {
 	if (is_buildin(*paras))
 		child_pro_buildin(paras, env, table);

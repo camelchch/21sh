@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_printable.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:52:08 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:52:36 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <curses.h>
 #include <term.h>
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 void		put_a_key(t_line *line, unsigned long key)
 {

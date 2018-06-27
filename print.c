@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "twenty_one.h"
 
 void	print_words_type(t_word *list)
 {

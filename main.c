@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:19:33 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 12:56:11 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/27 15:56:30 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ int		main(int ac, char **av, char **env)
 	char	**all_path;
 	char	**cp_env;
 
-	//	put_env(env);
 	(void)ac;
 	(void)av;
 	cp_env = NULL;
@@ -58,8 +57,6 @@ int		main(int ac, char **av, char **env)
 	all_path = path(cp_env);
 	init_shtable(table, all_path);
 	ft_freestrstr(all_path);
-	//	put_sh(table);
 	prompt(cp_env, table);
-	//	get_autoline(table);
 	return (0);
 }

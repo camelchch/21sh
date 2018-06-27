@@ -1,5 +1,17 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   prompt.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:15:49 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:16:19 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 static void	init_add(t_history *add, char *new_line)
 {
@@ -24,7 +36,7 @@ static void	add_history(t_history **history, t_history *add)
 	}
 }
 
-static int		not_empty(char *new_line)
+static int	not_empty(char *new_line)
 {
 	int		i;
 

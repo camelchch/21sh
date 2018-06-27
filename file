@@ -1,0 +1,3 @@
+2==    at 0x1000B6A46: malloc (in /Users/saxiao/.brew/Cellar/valgrind/3.13.0/lib/valgrind/vgpreload_memcheck-amd64-darwin.so)
+==46042==    by 0x100007945: prompt (prompt.c:49)
+==46042==    by 0x100003F46: main (main.c:62)

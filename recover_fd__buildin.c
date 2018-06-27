@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   recover_fd__buildin.c                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 17:16:30 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 17:17:35 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 static t_save_fd	*add_2recover(t_save_fd *recover, int nb_fd)
 {
@@ -34,7 +46,8 @@ t_save_fd		*fd_restorage(t_word *l, t_save_fd *recover)
 			n = (l->pre && l->pre->type == FD) ? ft_atoi(l->pre->word) : 0;
 				recover = add_2recover(recover, n);
 		}
-		if (l->type == GREAT || l->type == GREATAND || l->type == GREATANDMINUS || l->type == DGREAT)
+		if (l->type == GREAT || l->type == GREATAND || \
+				l->type == GREATANDMINUS || l->type == DGREAT)
 		{
 			n = (l->pre && l->pre->type == FD) ? ft_atoi(l->pre->word) : 1;
 				recover = add_2recover(recover, n);
@@ -44,7 +57,7 @@ t_save_fd		*fd_restorage(t_word *l, t_save_fd *recover)
 return(recover);
 }
 
-void		recover_fd(t_save_fd *recover)
+void			recover_fd(t_save_fd *recover)
 {
 	while (recover)
 	{
@@ -55,7 +68,7 @@ void		recover_fd(t_save_fd *recover)
 	}
 }
 
-void		free_saver_fd(t_save_fd *recover)
+void			free_saver_fd(t_save_fd *recover)
 {
 	t_save_fd	*temp;
 

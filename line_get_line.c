@@ -1,10 +1,22 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_get_line.c                                    :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:48:57 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <curses.h>
 #include <term.h>
 #include <sys/types.h>
 #include <sys/uio.h>
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 static unsigned long	get_key()
 {

@@ -1,30 +1,21 @@
-#include "minishell.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   line_engine.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/27 15:48:17 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-t_key	t[NB_KEY] = {
-	{ARROW_LEFT, line->move_left},
-	{ARROW_RIGHT, line->move_right},
-	{ARROW_UP, line->history_up},
-	{ARROW_DOWN, line->history_down},
-	{MY_DELECT, line->delete_key},
-	{MY_END, line->move_nright},
-	{MY_HOME, line->move_nleft},
-	{CONTRL_L, line->mv_left_word},
-	{CONTRL_H, line->mv_right_word},
-	{CONTRL_A, line->cp_all},
-	{CONTRL_B, line->cp_begin},
-	{CONTRL_E, line->cp_end},
-	{CONTRL_AT, line->cut_all},
-	{CONTRL_HASH, line->cut_begin},
-	{CONTRL_PERCENT, line->cut_end},
-	{CONTRL_P, line->paste},
-	{CONTRL_F, line->go_up},
-	{CONTRL_N, line->go_down},
-}
-*/
+#include "twenty_one.h"
 
 static void	init_for_enginie_2(t_key *t, t_line *line)
 {
+	t[11].a_key = CONTRL_E;
+	t[11].func = line->cp_end;
 	t[12].a_key = CONTRL_S;
 	t[12].func = line->cut_all;
 	t[13].a_key = CONTRL_HASH;
@@ -67,8 +58,6 @@ static void	init_for_engine(t_key *t, t_line *line)
 	t[9].func = line->cp_all;
 	t[10].a_key = CONTRL_B;
 	t[10].func = line->cp_begin;
-	t[11].a_key = CONTRL_E;
-	t[11].func = line->cp_end;
 	init_for_enginie_2(t, line);
 }
 
