@@ -1,0 +1,10 @@
+copy paste * 50 fails with bus error
+
+empty command line creates a leak
+
+NEVER start a program that is in current directory when there is no '/'
+		- for example, when in /bin directory with PATH empty, 'ls' should not work but './ls' or '/bin/ls' should
+
+ctrl+d in heredoc should act as delimiter reached
+
+history broken after quote completion
