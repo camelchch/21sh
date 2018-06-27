@@ -1,8 +1,8 @@
 #include <unistd.h>
 #include <stdlib.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
-int		nb_pipe_eachbloc(t_word *list)
+int			nb_pipe_eachbloc(t_word *list)
 {
 	int		i;
 
@@ -16,7 +16,7 @@ int		nb_pipe_eachbloc(t_word *list)
 	return (i);
 }
 
-static int		nb_args_each_exev(t_word *list)
+static int	nb_args_each_exev(t_word *list)
 {
 	int		i;
 
@@ -30,7 +30,7 @@ static int		nb_args_each_exev(t_word *list)
 	return (i);
 }
 
-char	**args_each_exev(t_word *list, char **env)
+char		**args_each_exev(t_word *list, char **env)
 {
 	char	**res;
 	int		i;
@@ -38,7 +38,8 @@ char	**args_each_exev(t_word *list, char **env)
 	i = 0;
 	(void)env;
 	res = malloc(sizeof(char *) * (nb_args_each_exev(list) + 1));
-	while (list && !is_logic(list->type) && list->type != SEMI_DOT && list->type != PIPE)
+	while (list && !is_logic(list->type) && list->type != SEMI_DOT && \
+			list->type != PIPE)
 	{
 		if (list->type == PROGRAM || list->type == BUIDIN || list->type == ARG)
 			res[i++] = list->word;
@@ -48,14 +49,15 @@ char	**args_each_exev(t_word *list, char **env)
 	return(res);
 }
 
-int		close_all_pipe(int *pipe_fd, int nb_pipe, int nb_pro)
+int			close_all_pipe(int *pipe_fd, int nb_pipe, int nb_pro)
 {
 	int		i;
 
 	i = 0;
 	while (i < nb_pipe * 2)
 	{
-		if ((nb_pro && i != nb_pro *2 -2 ) || (nb_pro < nb_pipe && i != nb_pro *2 + 1))
+		if ((nb_pro && i != nb_pro *2 -2 ) || \
+				(nb_pro < nb_pipe && i != nb_pro *2 + 1))
 		{
 			if (close(pipe_fd[i] < 0))
 				ft_putendl_fd("close failed", 2);

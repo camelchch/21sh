@@ -1,6 +1,6 @@
-#include "minishell.h"
+#include "twenty_one.h"
 
-int			program_exit_before(t_word *li)
+int					program_exit_before(t_word *li)
 {
 	while (li && li->type != PROGRAM && li->type != AND && li->type != OR && li->type != PIPE && li->type != SEMI_DOT)
 		li = li->pre;
@@ -18,17 +18,6 @@ static int			program_exit_after(t_word *li)
 		return (1);
 	return (0);
 }
-/*
-static int			heredoc_exit_before(t_word *li)
-{
-	while (li && li->type != DLESS && li->type != AND && li->type != OR &&\
-			li->type != PIPE && li->type != SEMI_DOT)
-		li = li->pre;
-	if (li && li->type == DLESS)
-		return (1);
-	return (0);
-}
-*/
 
 static int		test_for_err_func(t_word *cp)
 {
@@ -41,8 +30,7 @@ static int		test_for_err_func(t_word *cp)
 	return (0);
 }
 
-// <<& >>& with & i didn't do err handing
-int		err_in_words(t_word *cp)
+int				err_in_words(t_word *cp)
 {
 	while (cp)
 	{
@@ -52,11 +40,7 @@ int		err_in_words(t_word *cp)
 		{
 			if (!cp->next || cp->next->type != HERE_DOC_MARK)
 				return (return_message("\nMissing name for redirect.\n",1, 2));
-		//	if (heredoc_exit_before(cp->pre))
-		//		return (return_message("\nAmbiguous input redirect.\n",1, 1));
 		}
-	//	if (is_redirector(cp->type) && !program_exit_before(cp->pre))
-	//		return (return_message("\nInvalide null cmmand.\n", 1, 1));
 		if (cp->type == LESSAND && (!cp->next || cp->next->type != FD))
 			return (return_message("\nMissing file descriptor.\n",1, 2));
 		if (is_logic(cp->type) &&\

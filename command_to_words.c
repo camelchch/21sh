@@ -1,4 +1,4 @@
-#include "minishell.h"
+#include "twenty_one.h"
 
 static int		only_nb_str(char *str)
 {
@@ -42,7 +42,7 @@ static void		modif_type(t_word *last, t_word *add)
 	}
 }
 
-static t_word		*add_word(t_word *res, t_word *add)
+static t_word	*add_word(t_word *res, t_word *add)
 {
 	t_word	*cp;
 
@@ -57,7 +57,7 @@ static t_word		*add_word(t_word *res, t_word *add)
 	return (res);
 }
 
-t_word		*command_to_words(char *line)
+t_word			*command_to_words(char *line)
 {
 	t_word	*add;
 	t_word	*res;

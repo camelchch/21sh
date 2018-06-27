@@ -1,5 +1,5 @@
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 t_word		*pipe_or_type(char *line, int *index)
 {
@@ -47,8 +47,7 @@ t_word		*semidot_type(char *line, int *index)
 	return (add);
 }
 
-//if write failed/? 
-int		return_message(char *message, int re_value, int fd)
+int			return_message(char *message, int re_value, int fd)
 {
 	write(fd, message, ft_strlen(message));
 	return (re_value);

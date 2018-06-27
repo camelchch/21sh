@@ -6,11 +6,11 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:42:16 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/25 11:34:13 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/27 13:46:20 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "twenty_one.h"
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -47,7 +47,7 @@ static void	echo(char **paras)
 	}
 }
 
-static void	ft_exit(char ***env, t_sh *table)
+void	ft_exit(char ***env, t_sh *table)
 {
 	free_sh_table(table, 100);
 	ft_freestrstr(*env);

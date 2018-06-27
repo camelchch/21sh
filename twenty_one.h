@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:26:55 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 12:24:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/27 14:30:38 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -264,7 +264,6 @@ int			cd(char **paras, char ***env);
 //build_in_env.c
 int			put_env(char **env, char **paras, t_sh *table);
 void		put_strstr(char **str);
-void		put2_str_fd(char *str1, char *str2, int fd);
 
 
 //below is what i need with parsing
@@ -393,7 +392,6 @@ int				err_open_file(t_word *list);
 
 //child_program.c
 void		child_pro_bin(char **paras, char **env, t_sh *table);
-void		child_pro_buildin(t_word *list, char **paras, char **env, t_sh *table);
 void		do_child_pro(t_word *list, char **paras, char **env, t_sh *table);
 char		*path_in_sh(char *app, t_sh *table);
 
@@ -420,6 +418,7 @@ int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table);
 int			first_buildin_no_pipe(int nb_pipe, t_word *list);
 int			valide_program(char **str, t_sh *table);
 int			put2_str_fd_return(char *str1, char *str2, int fd, int re_value);
+void		put2_str_fd(char *str1, char *str2, int fd);
 
 //recover_fd__buildin.c
 t_save_fd	*fd_restorage(t_word *list, t_save_fd *recover);

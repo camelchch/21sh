@@ -1,8 +1,8 @@
-#include "minishell.h"
 #include <unistd.h>
 #include <stdlib.h>
+#include "twenty_one.h"
 
-int		is_buildin(char *app)
+int			is_buildin(char *app)
 {
 	return (!strcmp(app, "echo") || !strcmp(app, "cd") ||\
 			!strcmp(app, "setenv") || !strcmp(app, "unsetenv") ||\

@@ -1,9 +1,8 @@
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 static void	init_tempwd(char **tempwd, int ct, char ***paras, char *path)
 {
-	//char	*temp;
 	(void)ct;
 	(void)paras;
 
@@ -11,13 +10,6 @@ static void	init_tempwd(char **tempwd, int ct, char ***paras, char *path)
 	tempwd[1] = "OLDPWD";
 	tempwd[2] = getcwd(path, PATH_MAX + 1);
 	tempwd[3] = NULL;
-	/*	if (ct == 2)
-		{
-		temp = **paras;
-		(*paras)++;
-		free(temp);
-		}
-		*/
 }
 
 static void	oldpwd_home(char *cp, char ***env, int ct)

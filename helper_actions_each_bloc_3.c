@@ -1,10 +1,19 @@
 #include <unistd.h>
-#include "minishell.h"
+#include "twenty_one.h"
 
 int		put2_str_fd_return(char *str1, char *str2, int fd, int return_value)
 {
 	put2_str_fd(str1, str2, fd);
 	return (return_value);
+}
+
+void	put2_str_fd(char *str1, char *str2, int fd)
+{
+	if (str1 && str2)
+	{
+	write(fd, str1, ft_strlen(str1));
+	write(fd, str2, ft_strlen(str2));
+	}
 }
 
 int		valide_program(char **str, t_sh *table)
