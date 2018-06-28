@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:26:55 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:46:04 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 15:05:16 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,10 @@
 int		open_dquote;
 int		open_squote;
 int		open_backslash;
-int		line_edition_ing;
+//int		line_edition_ing;
 int		end_line;
 int		with_termcap;
+int		inside_doc_quote;
 
 #define MAX_BUF 4096
 #define SETNEW 1
@@ -254,7 +255,7 @@ char		**unset_env(char **paras, char **env);
 //do_buildin.c
 int			is_buildin(char *app);
 void		do_build(char **paras, char ***env, t_sh *table);
-void		replace_home(char *cp, char *home);
+void		replace_home_cd(char *cp, char *home);
 void		ft_exit(char ***env, t_sh *table);
 
 //build_in_cd.c
@@ -338,6 +339,8 @@ typedef struct s_program {
 
 // rm_quoting_in_word.c
 int				remove_quoting_word(char *word,char **env);
+void			case_dquote(t_helper *help, char *cp, char *word);
+void			case_squote(t_helper *help, char *cp, char *word);
 
 // remove_quoting_list.c
 void		change_part_str(char *ori, int start, int end, char *change);
@@ -435,4 +438,6 @@ void		free_word_list(t_word *list);
 
 //helper.c
 t_table		*malloc_add_sh(void);
+int			replace_home(char *word, char **env);
+void		case_dquote_squote(t_helper *help, char *cp, char *word);
 #endif

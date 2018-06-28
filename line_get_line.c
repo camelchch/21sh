@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:48:57 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:35:29 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int					get_line(char *prompt, char *new_line, t_line *line)
 	}
 	else
 	{
+		with_termcap = 0;
 		if (get_next_line(1, &ligne) == 0)
 			exit(0);
 		if (ligne)

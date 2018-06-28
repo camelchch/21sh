@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:19:35 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 19:31:18 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 14:13:19 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ static void	init_vari_for(t_helper *help, char *cp, char *vari, char *word)
 	ft_bzero(word, MAX_BUF);
 }
 
-static void	case_dquote(t_helper *help, char *cp, char *word)
+void		case_dquote(t_helper *help, char *cp, char *word)
 {
 	if (open_squote < 0)
 	{
@@ -38,7 +38,7 @@ static void	case_dquote(t_helper *help, char *cp, char *word)
 		word[help->index++] = '"';
 }
 
-static void	case_squote(t_helper *help, char *cp, char *word)
+void		case_squote(t_helper *help, char *cp, char *word)
 {
 	if (open_dquote < 0)
 	{
@@ -67,6 +67,8 @@ int		remove_quoting_word(char *word, char **env)
 	char	vari[MAX_BUF];
 	char	*vari_value;
 
+	if (replace_home(word, env))
+		return (1);
 	init_vari_for(&help, cp, vari, word);
 	while (cp[++(help.i)])
 	{
@@ -78,10 +80,8 @@ int		remove_quoting_word(char *word, char **env)
 				return(return_message("Undefined variable.\n", 1, 2));
 			change_part_str(cp, help.i, help.j - 1, vari_value);
 		}
-		if (cp[help.i] == '"')
-			case_dquote(&help, cp, word);
-		else if (cp[help.i] == '\'')
-			case_squote(&help, cp,  word);
+		if (cp[help.i] == '"' || cp[help.i] == '\'')
+			case_dquote_squote(&help, cp, word);
 		else
 			other_case(&help, cp, word);
 	}

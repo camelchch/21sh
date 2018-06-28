@@ -32,7 +32,7 @@ void		ft_exit(char ***env, t_sh *table)
 	exit(0);
 }
 
-void		replace_home(char *cp, char *home)
+void		replace_home_cd(char *cp, char *home)
 {
 	int		i;
 	char	temp[PATH_MAX + 1];

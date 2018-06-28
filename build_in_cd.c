@@ -25,7 +25,7 @@ static void	oldpwd_home(char *cp, char ***env, int ct)
 			ft_bzero(cp, PATH_MAX + 1);
 		}
 		else
-			ct == 1 ? ft_strcpy(cp, temp) : replace_home(cp, temp);
+			ct == 1 ? ft_strcpy(cp, temp) : replace_home_cd(cp, temp);
 	}
 	else
 	{

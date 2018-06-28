@@ -20,7 +20,7 @@ static void	write2_temp_file(char *word)
 
 	for_here_doc(&temp_fd, &doc);
 	i = 1;
-	while (!doc.here_end)
+	while (inside_doc_quote)
 	{
 		ft_bzero(doc.here, MAX_BUF);
 		i == 0 ? ft_printf("\n") : (void)i;
@@ -33,7 +33,7 @@ static void	write2_temp_file(char *word)
 			write(temp_fd, "\n",1);
 		}
 		else
-			doc.here_end = 1;
+			inside_doc_quote = 0;
 	}
 	ft_printf("\n");
 	if (close(temp_fd) == -1)
@@ -47,6 +47,7 @@ void	my_here_doc_word(t_word *list)
 	{
 	if (list->type == DLESS)
 	{
+		inside_doc_quote = 1;
 		write2_temp_file(list->next->word);
 		list->type = LESS;
 		list->next->type = FILES;
