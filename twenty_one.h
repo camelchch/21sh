@@ -6,50 +6,50 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/29 00:18:22 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 00:45:48 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef TWENTY_ONE_H
-#include <limits.h>
-#include <sys/types.h>
-#include "libft/libft.h"
+# define TWENTY_ONE_H
+# include <limits.h>
+# include <sys/types.h>
+# include "libft/libft.h"
 
-int		open_dquote;
-int		open_squote;
-int		open_backslash;
+int		g_open_dquote;
+int		g_open_squote;
+int		g_open_backslash;
 //int		line_edition_ing;
-int		end_line;
-int		with_termcap;
-int		inside_doc_quote;
-int		clc_get;
+int		g_end_line;
+int		g_with_termcap;
+int		g_inside_doc_quote;
+int		g_ctlc;
+# define MAX_BUF 10000
+# define SETNEW 1
+# define SETOLD 0
 
-#define MAX_BUF 10000
-#define SETNEW 1
-#define SETOLD 0
-
-typedef struct s_table
+typedef struct	s_table
 {
 	char			name[NAME_MAX + 1];
 	char			path[PATH_MAX + 1];
 	struct s_table	*next;
-}					t_table;
+}				t_table;
 
 typedef struct	s_shtable
 {
 	t_table		*sh_ta;
 }				t_sh;
 
-typedef struct s_vari
+typedef struct	s_vari
 {
 	int		in;
 	int		num_pipe;
 	int		pipe_fd[2];
 	int		ct;
 	pid_t	pid;
-}			t_vari;
+}				t_vari;
 
-typedef enum s_type{
+typedef enum	e_type{
 	PROGRAM,
 	ARG,
 	LESS,
@@ -65,10 +65,10 @@ typedef enum s_type{
 	PIPE,
 	SEMI_DOT,
 	FILES,
-	FD, 
+	FD,
 	HERE_DOC_MARK,
 	BUIDIN,
-}			t_type;
+}				t_type;
 
 typedef struct	s_word{
 	char			word[MAX_BUF];
@@ -77,73 +77,73 @@ typedef struct	s_word{
 	struct s_word	*pre;
 }				t_word;
 
-typedef struct s_save_fd{
-	int		fd_2be_saved;
-	int		fd_saved_in2;
-	struct s_save_fd *next;
+typedef struct	s_save_fd{
+	int					fd_2be_saved;
+	int					fd_saved_in2;
+	struct s_save_fd	*next;
 }				t_save_fd;
 
-#define STDIN_FILENO 0
-#define STDOUT_FILENO 1
-#define NB_KEY 20
-#define	ARROW_LEFT 4479771
-#define ARROW_RIGHT 4414235
-#define	ARROW_UP 4283163
-#define ARROW_DOWN 4348699
-#define MY_DELECT 127
-#define MY_HOME 4741915
-#define MY_END 4610843
-#define CT_SHIFT_LEFT 74999712013083
-#define CONTRL_L 12
-#define CONTRL_H 8
-#define CONTRL_A 1
-#define CONTRL_B 2
-#define CONTRL_E 5
-#define CONTRL_P 16
-#define CONTRL_HASH 27
-#define CONTRL_PERCENT 29
-#define CONTRL_S 19
-#define MY_PAGE_UP 45067098907
-#define MY_PAGE_DOWN 45067164443
-#define OPTION_SHIFT_U 43202
-#define OPTION_SHIFT_D 36547
-#define CONTRL_N 14
-#define SHIFT_UP 71683997260571
-#define SHIFT_DOWN 71683997260571
-#define CONTRL_F 6
-#define CONTRL_D 4
-#define DELETE_AT_POSITION 2117294875
+# define STDIN_FILENO 0
+# define STDOUT_FILENO 1
+# define NB_KEY 20
+# define ARROW_LEFT 4479771
+# define ARROW_RIGHT 4414235
+# define ARROW_UP 4283163
+# define ARROW_DOWN 4348699
+# define MY_DELECT 127
+# define MY_HOME 4741915
+# define MY_END 4610843
+# define CT_SHIFT_LEFT 74999712013083
+# define CONTRL_L 12
+# define CONTRL_H 8
+# define CONTRL_A 1
+# define CONTRL_B 2
+# define CONTRL_E 5
+# define CONTRL_P 16
+# define CONTRL_HASH 27
+# define CONTRL_PERCENT 29
+# define CONTRL_S 19
+# define MY_PAGE_UP 45067098907
+# define MY_PAGE_DOWN 45067164443
+# define OPTION_SHIFT_U 43202
+# define OPTION_SHIFT_D 36547
+# define CONTRL_N 14
+# define SHIFT_UP 71683997260571
+# define SHIFT_DOWN 71683997260571
+# define CONTRL_F 6
+# define CONTRL_D 4
+# define DELETE_AT_POSITION 2117294875
 
-char	temp_file[MAX_BUF];
+char	g_temp_file[MAX_BUF];
 
-typedef struct s_history
+typedef struct	s_history
 {
-	char his[MAX_BUF];
-	struct s_history *next;
-	struct s_history *pre;;
+	char				his[MAX_BUF];
+	struct s_history	*next;
+	struct s_history	*pre;
 }				t_history;
 
-t_history	*history;
+t_history	*g_history;
 
-typedef struct s_line
+typedef struct	s_line
 {
-	int			pos;
+	int				pos;
 	unsigned char	buf[MAX_BUF];
 	unsigned char	cp[MAX_BUF];
 	unsigned char	here_mark[MAX_BUF];
 	unsigned char	here[MAX_BUF];
 	unsigned char	ici_doc[MAX_BUF];
-	int			buf_len;
-	int			line_max;
-	int			start_po;
-	int			his_mostdown;
-	int			his_mostup;
-	int			up_indown;
+	int				buf_len;
+	int				line_max;
+	int				start_po;
+	int				his_mostdown;
+	int				his_mostup;
+	int				up_indown;
 	int			one_his;
 	int			here_end;
 	t_history	*last_his;
 
-	int			(*printable)(struct s_line *line, unsigned long  a_key);
+	int			(*printable)(struct s_line *line, unsigned long a_key);
 	int			(*move_left)(struct s_line *line);
 	int			(*move_right)(struct s_line *line);
 	int			(*delete_key)(struct s_line *line);
@@ -166,15 +166,14 @@ typedef struct s_line
 	int			(*delete_at_position)(struct s_line *line);
 	int			(*engine)(struct s_line *line, unsigned long a_key);
 }				t_line;
-
-typedef struct s_key
+typedef struct	s_key
 {
 	unsigned long	a_key;
-	int			(*func)(t_line *);
+	int				(*func)(t_line *);
 }				t_key;
 
-char		new_line[MAX_BUF];
-t_line		a_line;
+char		g_new_line[MAX_BUF];
+t_line		g_line;
 
 char		*get_autoline(t_sh *table);
 void		shell(int ac, char **av, char **env, t_sh *table);
@@ -227,17 +226,17 @@ void		ft_exit(char ***env, t_sh *table);
 int			cd(char **paras, char ***env);
 int			put_env(char **env, char **paras, t_sh *table);
 typedef struct		s_helper{
-		int		i;
-		int		j;
-		int		k;
-		int		index;
+	int		i;
+	int		j;
+	int		k;
+	int		index;
 }					t_helper;
 
-typedef struct s_program {
-		char	**pro_args;
+typedef struct	s_program {
+	char	**pro_args;
 }				t_program;
 
-int				remove_quoting_word(char *word,char **env);
+int				remove_quoting_word(char *word, char **env);
 void			case_dquote(t_helper *help, char *cp, char *word);
 void			case_squote(t_helper *help, char *cp, char *word);
 void		change_part_str(char *ori, int start, int end, char *change);
@@ -253,7 +252,7 @@ int				is_logic(t_type type);
 t_word			*command_to_words(char *line);
 t_word			*init_add_word(char *line, int *i, int *j);
 t_word			*malloc_add(void);
-t_word			*init_seprator(char *line,int *index);
+t_word			*init_seprator(char *line, int *index);
 t_word			*pipe_or_type(char *line, int *index);
 t_word			*and_type(char *line, int *index);
 t_word			*semidot_type(char *line, int *index);
