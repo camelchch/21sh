@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:51:22 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:51:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:52:34 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,18 +36,21 @@ int		paste(t_line *line)
 	ft_bzero(rest, MAX_BUF);
 	ft_strcpy(rest, (char *)line->buf + index);
 	i = 0;
-	while ( line->cp[i])
-		line->buf[index++] = line->cp[i++];
-	i = 0;
-	while ( rest[i])
-		line->buf[index++] = rest[i++];
-	i = line->buf_len - line->pos;
-	line->buf_len = line->pos;
-	index = line->pos;
-	while (line->buf[index])
-		put_a_key(line, line->buf[index++]);
-	while (i--)
-		move_left(line);
+	if (line->buf_len + ft_strlen(rest) < MAX_BUF - 1)
+	{
+		while (line->cp[i])
+			line->buf[index++] = line->cp[i++];
+		i = 0;
+		while (rest[i])
+			line->buf[index++] = rest[i++];
+		i = line->buf_len - line->pos;
+		line->buf_len = line->pos;
+		index = line->pos;
+		while (line->buf[index])
+			put_a_key(line, line->buf[index++]);
+		while (i--)
+			move_left(line);
+	}
 	return (0);
 }
 

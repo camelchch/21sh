@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:52:52 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:54:54 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:53:05 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ static int			open_quote_exit(char *line)
 			open_backslash = -open_backslash;
 	}
 	if (open_dquote > 0 || open_squote > 0 || open_backslash > 0)
-		return(1);
+		return (1);
 	return (0);
 }
 
@@ -49,17 +49,18 @@ void				prompt_open_quote(char *line)
 			get_line("> ", new_line, &quote_line);
 			line[ft_strlen(line) - 1] = '\0';
 			ft_strcat(line, new_line);
-			with_termcap ? ft_printf("\n") : (void)with_termcap;
+			(with_termcap && !clc_get) ? ft_printf("\n") : (void)with_termcap;
 		}
 		else
 		{
-			ft_strcat(line, "\n");
+			if (!clc_get)
+				ft_strcat(line, "\n");
 			if (open_dquote > 0)
 				get_line("dquote> ", new_line, &quote_line);
 			else
 				get_line("quote> ", new_line, &quote_line);
 			ft_strcat(line, new_line);
-			with_termcap ? ft_printf("\n") : (void)with_termcap;
+			(with_termcap && !clc_get) ? ft_printf("\n") : (void)with_termcap;
 		}
 	}
 }

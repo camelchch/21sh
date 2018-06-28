@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:56:54 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:57:46 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:54:48 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	free_sh_table(t_sh *table, int index)
 			{
 				temp = cp;
 				cp = cp->next;
-			free(temp);
+				free(temp);
 			}
 		}
 		table[i].sh_ta = NULL;
@@ -66,7 +66,7 @@ void	free_word_list(t_word *list)
 {
 	t_word *temp;
 
-	while(list)
+	while (list)
 	{
 		temp = list;
 		list = list->next;

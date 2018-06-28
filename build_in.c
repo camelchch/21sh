@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/22 11:42:16 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 13:46:20 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:06:06 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static void	echo(char **paras)
 	}
 }
 
-void	ft_exit(char ***env, t_sh *table)
+void		ft_exit(char ***env, t_sh *table)
 {
 	free_sh_table(table, 100);
 	ft_freestrstr(*env);

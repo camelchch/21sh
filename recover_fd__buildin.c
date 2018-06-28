@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:16:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:17:35 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:56:40 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static t_save_fd	*add_2recover(t_save_fd *recover, int nb_fd)
 	return (recover);
 }
 
-t_save_fd		*fd_restorage(t_word *l, t_save_fd *recover)
+t_save_fd			*fd_restorage(t_word *l, t_save_fd *recover)
 {
 	int			n;
 
@@ -44,20 +44,20 @@ t_save_fd		*fd_restorage(t_word *l, t_save_fd *recover)
 		if (l->type == LESS || l->type == LESSAND || l->type == LESSANDMINUS)
 		{
 			n = (l->pre && l->pre->type == FD) ? ft_atoi(l->pre->word) : 0;
-				recover = add_2recover(recover, n);
+			recover = add_2recover(recover, n);
 		}
 		if (l->type == GREAT || l->type == GREATAND || \
 				l->type == GREATANDMINUS || l->type == DGREAT)
 		{
 			n = (l->pre && l->pre->type == FD) ? ft_atoi(l->pre->word) : 1;
-				recover = add_2recover(recover, n);
+			recover = add_2recover(recover, n);
 		}
 		l = l->next;
 	}
-return(recover);
+	return (recover);
 }
 
-void			recover_fd(t_save_fd *recover)
+void				recover_fd(t_save_fd *recover)
 {
 	while (recover)
 	{
@@ -68,12 +68,12 @@ void			recover_fd(t_save_fd *recover)
 	}
 }
 
-void			free_saver_fd(t_save_fd *recover)
+void				free_saver_fd(t_save_fd *recover)
 {
 	t_save_fd	*temp;
 
 	temp = NULL;
-	while(recover)
+	while (recover)
 	{
 		temp = recover;
 		close(temp->fd_saved_in2);

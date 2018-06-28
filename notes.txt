@@ -8,3 +8,5 @@ NEVER start a program that is in current directory when there is no '/'
 ctrl+d in heredoc should act as delimiter reached
 
 history broken after quote completion
+
+env GUGU=GUGU JIJI=jiji program didn't do

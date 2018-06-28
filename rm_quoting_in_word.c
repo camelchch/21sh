@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:19:35 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 14:13:19 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 00:01:53 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void		case_squote(t_helper *help, char *cp, char *word)
 		if (!dslash_before(cp, help->i))
 			word[help->index - 1] = '\'';
 		else
-		open_squote = -open_squote;
+			open_squote = -open_squote;
 	}
 	else
 		word[help->index++] = '\'';
@@ -53,19 +53,20 @@ void		case_squote(t_helper *help, char *cp, char *word)
 
 static void	other_case(t_helper *help, char *cp, char *word)
 {
-	 if (open_dquote < 0 && open_squote < 0 && help->i - 1 >= 0 && \
+	if (open_dquote < 0 && open_squote < 0 && help->i - 1 >= 0 && \
 			cp[help->i - 1] == '\\' && dslash_before(cp, help->i - 1))
 		word[help->index - 1] = cp[help->i];
-	else if (!(cp[help->i] == '\\' && !dslash_before(cp, help->i) && open_squote < 0))
+	else if (!(cp[help->i] == '\\' && !dslash_before(cp, help->i) \
+				&& open_squote < 0))
 		word[help->index++] = cp[help->i];
 }
 
-int		remove_quoting_word(char *word, char **env)
+int			remove_quoting_word(char *word, char **env)
 {
 	t_helper	help;
-	char	cp[MAX_BUF];
-	char	vari[MAX_BUF];
-	char	*vari_value;
+	char		cp[MAX_BUF];
+	char		vari[MAX_BUF];
+	char		*vari_value;
 
 	if (replace_home(word, env))
 		return (1);
@@ -77,7 +78,7 @@ int		remove_quoting_word(char *word, char **env)
 			dollor_sign(&help, cp, vari);
 			vari_value = ft_getenv(env, vari);
 			if (!vari_value)
-				return(return_message("Undefined variable.\n", 1, 2));
+				return (return_message("Undefined variable.\n", 1, 2));
 			change_part_str(cp, help.i, help.j - 1, vari_value);
 		}
 		if (cp[help.i] == '"' || cp[help.i] == '\'')

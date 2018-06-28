@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:20:31 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:23:05 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 00:05:30 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include <stdlib.h>
 #include "twenty_one.h"
 
-int		nb_str(char **paras)
+int			nb_str(char **paras)
 {
 	int		ct;
 
@@ -34,7 +34,6 @@ static char	**add_env(char ***env, char **paras)
 
 	i = -1;
 	ct = nb_str(*env) + 2;
-
 	cp = *env;
 	for_free = *env;
 	*env = malloc(sizeof(char *) * ct);
@@ -88,11 +87,11 @@ char		**set_env(char **paras, char ***env)
 		free(temp);
 	}
 	else
-		return(add_env(env, paras));
+		return (add_env(env, paras));
 	return (*env);
 }
 
-char	**unset_env(char **paras, char **env)
+char		**unset_env(char **paras, char **env)
 {
 	char	**cp;
 	int		index;
@@ -108,9 +107,9 @@ char	**unset_env(char **paras, char **env)
 	{
 		cp++;
 		index++;
-		}
+	}
 	if (*cp)
-		env = delet_env(env,  index);
+		env = delet_env(env, index);
 	else
 		put2_str_fd(*paras, " :no such variable %s\n", 2);
 	return (env);

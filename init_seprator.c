@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:39:18 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:39:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:40:38 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ static t_word	*less_type(char *line, int *index)
 
 static void		great_and(char *line, int *index, t_word *add)
 {
-	if (*index + 2 < (int)ft_strlen(line) && line[*index + 2] == '-' )
+	if (*index + 2 < (int)ft_strlen(line) && line[*index + 2] == '-')
 	{
 		ft_strcpy(add->word, ">&-");
 		add->type = GREATANDMINUS;
@@ -88,7 +88,7 @@ static t_word	*great_type(char *line, int *index)
 	return (add);
 }
 
-t_word		*init_seprator(char *line, int *index)
+t_word			*init_seprator(char *line, int *index)
 {
 	if (line[*index] == '<')
 		return (less_type(line, index));

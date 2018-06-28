@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:19:33 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:56:30 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:53:33 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,10 +36,10 @@ static void	set_sh_null(t_sh *table, int index)
 
 	i = -1;
 	while (++i < index)
-			table[i].sh_ta = NULL;
+		table[i].sh_ta = NULL;
 }
 
-int		main(int ac, char **av, char **env)
+int			main(int ac, char **av, char **env)
 {
 	t_sh	table[100];
 	char	**all_path;
@@ -57,6 +57,7 @@ int		main(int ac, char **av, char **env)
 	all_path = path(cp_env);
 	init_shtable(table, all_path);
 	ft_freestrstr(all_path);
+	clc_get = 0;
 	prompt(cp_env, table);
 	return (0);
 }

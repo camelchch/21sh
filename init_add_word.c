@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:39:38 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:39:42 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:35:16 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ t_word		*malloc_add(void)
 
 static void	init_vari_for_add_word(t_word **add, int *only_nb, int *j)
 {
-
 	open_dquote = -1;
 	open_squote = -1;
 	*add = NULL;
@@ -64,7 +63,7 @@ t_word		*init_add_word(char *line, int *i, int *j)
 	else
 	{
 		add = malloc_add();
-		while ((open_dquote > 0 || open_squote > 0||\
+		while ((open_dquote > 0 || open_squote > 0 ||\
 					!is_seprator_w(line, *i)) && *i < (int)ft_strlen(line))
 		{
 			change(line, i, &only_nb);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_actions_each_bloc_3.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/28 23:30:02 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/28 23:30:03 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "twenty_one.h"
 
@@ -11,8 +23,8 @@ void	put2_str_fd(char *str1, char *str2, int fd)
 {
 	if (str1 && str2)
 	{
-	write(fd, str1, ft_strlen(str1));
-	write(fd, str2, ft_strlen(str2));
+		write(fd, str1, ft_strlen(str1));
+		write(fd, str2, ft_strlen(str2));
 	}
 }
 
@@ -24,7 +36,7 @@ int		valide_program(char **str, t_sh *table)
 		return (0);
 	if (is_buildin(*str))
 		return (1);
-	if (!access(*str, F_OK))
+	if (ft_strstr(*str, "/") && !access(*str, F_OK))
 	{
 		if (access(*str, X_OK))
 			return (put2_str_fd_return(*str, " :permission denied.\n", 2, 0));

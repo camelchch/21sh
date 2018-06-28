@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:15:49 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 15:17:53 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:55:25 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,15 +57,13 @@ int			prompt(char **env, t_sh *table)
 	ft_strcpy(temp_file, "./42sh_tmp.c");
 	while (42)
 	{
-	//	line_edition_ing = 1;
-		add = malloc(sizeof(t_history));
 		ft_bzero(new_line, MAX_BUF);
-		get_line("$> ",new_line, &a_line);
+		get_line("$> ", new_line, &a_line);
 		if (with_termcap)
 			ft_printf("\n");
 		if (not_empty(new_line))
 		{
-//			line_edition_ing = 0;
+			add = malloc(sizeof(t_history));
 			prompt_open_quote(new_line);
 			init_add(add, new_line);
 			add_history(&history, add);

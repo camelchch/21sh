@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:35:39 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 00:04:01 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,53 +22,52 @@
 #include <signal.h>
 #include "twenty_one.h"
 
-static void	default_termi_mode()
+static void	default_termi_mode(void)
 {
-	struct	termios	tattr;
+	struct termios	tattr;
 
 	tcgetattr(STDIN_FILENO, &tattr);
 	tattr.c_lflag |= (ECHO | ICANON);
 	tattr.c_oflag |= (OPOST);
-	tcsetattr(STDIN_FILENO, TCSADRAIN,&tattr);
+	tcsetattr(STDIN_FILENO, TCSADRAIN, &tattr);
 }
 
 static void	for_attr(struct termios *new, struct termios old)
 {
-		*new = old;
-		new->c_lflag &= ~(ECHO | ICANON);
-		new->c_lflag |= ISIG;
-		new->c_oflag &= ~(OPOST);
-		new->c_cc[VMIN] = 1;
-		new->c_cc[VTIME] = 0;
-		tcsetattr(STDIN_FILENO, TCSADRAIN, new);
+	*new = old;
+	new->c_lflag &= ~(ECHO | ICANON);
+	new->c_lflag |= ISIG;
+	new->c_oflag &= ~(OPOST);
+	new->c_cc[VMIN] = 1;
+	new->c_cc[VTIME] = 0;
+	tcsetattr(STDIN_FILENO, TCSADRAIN, new);
 }
 
 int			init_attr(int mod)
 {
-	static struct	termios old;
+	static struct termios	old;
 	static int				oldatt = 0;
-	struct	termios			new;
+	struct termios			new;
 
 	if (!oldatt)
 	{
 		oldatt = 1;
 		if (tcgetattr(0, &old) == -1)
-			return(return_message("can't get att", -1, 2));
+			return (return_message("can't get att", -1, 2));
 	}
 	if (mod == SETNEW)
 	{
 		for_attr(&new, old);
-	if (tgetent(NULL, getenv("TERM")) != 1)
-	{
-		default_termi_mode();
+		if (tgetent(NULL, getenv("TERM")) != 1)
+		{
+			default_termi_mode();
 			return (-1);
-	}
+		}
 	}
 	else
 		default_termi_mode();
 	return (0);
 }
-
 
 int			my_putc(int c)
 {

@@ -6,19 +6,19 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:19:01 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 14:13:07 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:57:24 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "twenty_one.h"
 
-static int		type_can_hv_quote(t_word *list)
+static int	type_can_hv_quote(t_word *list)
 {
 	return (list->type == PROGRAM || list->type == ARG || list->type == FILES);
 	return (0);
 }
 
-void	change_part_str(char *ori, int start, int end, char *change)
+void		change_part_str(char *ori, int start, int end, char *change)
 {
 	char	after[MAX_BUF];
 
@@ -29,14 +29,14 @@ void	change_part_str(char *ori, int start, int end, char *change)
 	ft_strcat(ori, after);
 }
 
-void	dollor_sign(t_helper *help, char *cp, char *vari)
+void		dollor_sign(t_helper *help, char *cp, char *vari)
 {
 	help->j = help->i + 1;
 	while (cp[help->j] && cp[help->j] != '"')
 		vari[(help->k)++] = cp[(help->j)++];
 }
 
-void	remove_quoting_list(t_word *list, char **env)
+void		remove_quoting_list(t_word *list, char **env)
 {
 	while (list)
 	{
@@ -50,7 +50,7 @@ void	remove_quoting_list(t_word *list, char **env)
 	}
 }
 
-int		remove_quoting_bloc(t_word *list, char **env)
+int			remove_quoting_bloc(t_word *list, char **env)
 {
 	int		find_bloc;
 
@@ -63,12 +63,12 @@ int		remove_quoting_bloc(t_word *list, char **env)
 				return (1);
 			if (list->type == PROGRAM && is_buildin(list->word))
 				list->type = BUIDIN;
-				}
-			if (!list->next || is_logic(list->next->type) || \
-					list->next->type == SEMI_DOT)
-				find_bloc = 1;
-			else
-				list = list->next;
+		}
+		if (!list->next || is_logic(list->next->type) || \
+				list->next->type == SEMI_DOT)
+			find_bloc = 1;
+		else
+			list = list->next;
 	}
 	return (0);
 }

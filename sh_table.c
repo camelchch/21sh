@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:23:38 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:24:28 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 00:02:20 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@
 
 char		*ft_getenv(char **env, char *nm)
 {
-
 	while (env && *env)
 	{
 		if (ft_strlen(*env) > ft_strlen(nm) && (*env)[ft_strlen(nm)] == '=' &&\
@@ -32,7 +31,7 @@ char		**path(char **env)
 	while (env && *env)
 	{
 		if (!ft_strncmp(*env, "PATH=", 5))
-	return (ft_split(*env + 5, ":"));
+			return (ft_split(*env + 5, ":"));
 		env++;
 	}
 	return (NULL);
@@ -53,17 +52,17 @@ int			calcu_index(char *name)
 
 static void	addin_table(t_sh *table, t_table *add, int index)
 {
-		t_table		*cp;
+	t_table		*cp;
 
-		if (table[index].sh_ta == NULL)
-			table[index].sh_ta = add;
-		else
-		{
-			cp = table[index].sh_ta;
-			while (cp->next)
-				cp = cp->next;
-			cp->next = add;
-		}
+	if (table[index].sh_ta == NULL)
+		table[index].sh_ta = add;
+	else
+	{
+		cp = table[index].sh_ta;
+		while (cp->next)
+			cp = cp->next;
+		cp->next = add;
+	}
 }
 
 void		init_shtable(t_sh *table, char **path)
@@ -77,18 +76,18 @@ void		init_shtable(t_sh *table, char **path)
 	while (path && *path)
 	{
 		if ((dirp = opendir(*path)))
-			{
-		while ((dir = readdir(dirp)))
 		{
-			add = malloc_add_sh();
-			ft_strcpy(add->name, dir->d_name);
-			ft_strcpy(add->path, *path);
-			ft_strcat(add->path, "/");
-			ft_strcat(add->path, add->name);
-			index = calcu_index(add->name);
-			addin_table(table, add, index);
-		}
-		closedir(dirp);
+			while ((dir = readdir(dirp)))
+			{
+				add = malloc_add_sh();
+				ft_strcpy(add->name, dir->d_name);
+				ft_strcpy(add->path, *path);
+				ft_strcat(add->path, "/");
+				ft_strcat(add->path, add->name);
+				index = calcu_index(add->name);
+				addin_table(table, add, index);
+			}
+			closedir(dirp);
 		}
 		path++;
 	}

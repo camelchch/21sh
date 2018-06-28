@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.h                                        :+:      :+:    :+:   */
+/*   twenty_one.h                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/01/31 12:26:55 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 15:05:16 by saxiao           ###   ########.fr       */
+/*   Created: 2018/06/29 00:15:00 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/29 00:18:22 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef TWENTY_ONE_H
 #include <limits.h>
 #include <sys/types.h>
 #include "libft/libft.h"
 
-#ifndef MINISHELL_H
 int		open_dquote;
 int		open_squote;
 int		open_backslash;
@@ -22,8 +22,9 @@ int		open_backslash;
 int		end_line;
 int		with_termcap;
 int		inside_doc_quote;
+int		clc_get;
 
-#define MAX_BUF 4096
+#define MAX_BUF 10000
 #define SETNEW 1
 #define SETOLD 0
 
@@ -48,23 +49,23 @@ typedef struct s_vari
 	pid_t	pid;
 }			t_vari;
 
-typedef enum s_type {
-	PROGRAM = 10,
-	ARG, //
-	LESS,//< 
-	LESSAND,// <&
-	LESSANDMINUS,// <&-
-	DLESS, //<<
-	AND, //&&
-	GREAT, //>
-	GREATAND, // >&
-	GREATANDMINUS, // >&-
-	DGREAT, //>>
-	OR,//||
-	PIPE, //|
-	SEMI_DOT, // ;
-	FILES, //
-	FD, //
+typedef enum s_type{
+	PROGRAM,
+	ARG,
+	LESS,
+	LESSAND,
+	LESSANDMINUS,
+	DLESS,
+	AND,
+	GREAT,
+	GREATAND,
+	GREATANDMINUS,
+	DGREAT,
+	OR,
+	PIPE,
+	SEMI_DOT,
+	FILES,
+	FD, 
 	HERE_DOC_MARK,
 	BUIDIN,
 }			t_type;
@@ -117,7 +118,7 @@ char	temp_file[MAX_BUF];
 
 typedef struct s_history
 {
-	char his[2048];
+	char his[MAX_BUF];
 	struct s_history *next;
 	struct s_history *pre;;
 }				t_history;
@@ -180,264 +181,119 @@ void		shell(int ac, char **av, char **env, t_sh *table);
 void		each_cmdline(char *cmdline, char **env, t_sh *table);
 void		pipes(char *cmdline, int nb_pipe, char ***env, t_sh *table);
 int			no_pipe(char *cmdline);
-
-//termcap_setting.c
 int		init_attr(int mod);
 int			my_putc(int c);
-
-//line_engine.c
 int			engine(t_line *line, unsigned long key);
-//void		ft_freestrstr(char **cp_env);
-
-//line_mv_left_right.c
 int			move_left(t_line *line);
 int			move_nleft(t_line *line);
 int			mv_left_word(t_line *line);
 int			mv_right_word(t_line *line);
 int			move_right(t_line *line);
-
-//line_delete.c
 int			move_nright(t_line *line);
 int			delete_key(t_line *line);
 int			delete_all(t_line *line);
-
-//line_ctrl_d.c
 int			delete_at_position(t_line *line);
 int			ctrl_d(t_line *line);
-
-//line_printable.c
 int			printable(t_line *line, unsigned long key);
 void		put_a_key(t_line *line, unsigned long key);
-
-//line_his_up_down.c
 int			history_up(t_line *line);
 int			history_down(t_line *line);
-
-//line_cp_cut.c
 int			cp_all(t_line *line);
 int			cp_begin(t_line *line);
 int			cp_end(t_line *line);
 int			cut_all(t_line *line);
 int			cut_begin(t_line *line);
-
-//line_paste_go_updown.c
 int			cut_end(t_line *line);
 int			paste(t_line *line);
 int			go_up(t_line *line);
 int			go_down(t_line *line);
-
-//line_get_line.c
 int			get_line(char *prompt, char *new_line, t_line *line);
 void		init_line(char	*prompt, t_line *line);
-
-//line_prompt_open_quote.c
 void		prompt_open_quote(char *line);
-
-
-//prompt.c
 int			prompt(char **env, t_sh *table);
-
-//sh_table.c
 char		*ft_getenv(char **env, char *name);
 char		**path(char **env);
 int			calcu_index(char *name);
 void		init_shtable(t_sh *table, char **path);
-
-//update_env.c
 void		update_shlvl(char ***env);
 void		update_lastapp(char *lastcmd, char ***env);
-
-//set_unset_env
 int			nb_str(char **str);
 char		**set_env(char **paras, char ***env);
 char		**unset_env(char **paras, char **env);
-
-//do_buildin.c
 int			is_buildin(char *app);
 void		do_build(char **paras, char ***env, t_sh *table);
 void		replace_home_cd(char *cp, char *home);
 void		ft_exit(char ***env, t_sh *table);
-
-//build_in_cd.c
 int			cd(char **paras, char ***env);
-
-//build_in_env.c
 int			put_env(char **env, char **paras, t_sh *table);
-void		put_strstr(char **str);
-
-
-//below is what i need with parsing
-/*
-ls -la /bin > file1 2>&- && cat -e file1 | less
-
-WORD  >>>> ls   >    file1  2>&-    cat -e  file1  |    less
-TOKEN >>>> BIN DLESS FILE  GREATAND BIN OPT FILE  PIPE  BIN
-
-~~ exemple fait a l'arrache ~~
-*/
-
-typedef enum s_token {
-	//BIN = 0,
-	//BUILTIN,
-//	OPT,
-//	ARG,
-	FILEREDI,
-	OPERAND,
-	//FILES,
-}			t_token;
-
-/*
-t_list *l;
-
-
-if (l->next->tok == SUBTOKEN)
-{
-	if (l->next->tok == PIPE)
-		dup2(l->out.fd, STDOUT_FILENO);
-}
-
-if (l->prev->tok == SUBTOKEN && l->prev->sub == PIPE)
-*/
-
-
-typedef struct	s_file{
-	char 	*name;
-	int		fd;
-}		t_file;
-
-typedef struct		s_list_token{
-	t_token			*tok; 
-//	t_operand		*next; //(default null)
-//	t_operand		*prev; //(default null)
-	char			*name;
-	t_file			out;
-	t_file			in;
-	char			**args;
-//	char			*opt;
-	char			**env;
-	struct s_list_token	*after;
-	struct s_list_token	*before;
-}					t_list_token;
-
 typedef struct		s_helper{
 		int		i;
 		int		j;
 		int		k;
 		int		index;
 }					t_helper;
-//ls | less
 
 typedef struct s_program {
 		char	**pro_args;
 }				t_program;
 
-
-//execve(ls) out > execve(less) > open(file)
-
-// sh_table.c
-//char			*ft_getenv(char **env,char *nm);
-
-// rm_quoting_in_word.c
 int				remove_quoting_word(char *word,char **env);
 void			case_dquote(t_helper *help, char *cp, char *word);
 void			case_squote(t_helper *help, char *cp, char *word);
-
-// remove_quoting_list.c
 void		change_part_str(char *ori, int start, int end, char *change);
 void		dollor_sign(t_helper *help, char *cp, char *vari);
 void		remove_quoting_list(t_word *list, char **env);
 int			remove_quoting_bloc(t_word *list, char **env);
-
-// print.c
 void			print_words_type(t_word *list);
-
-// err_in_words.c
 int				err_in_words(t_word *list);
 int				program_exit_before(t_word *li);
-
-// is_lexing_type.c
 int				is_seprator_w(char *line, int index);
 int				is_redirector(t_type type);
 int				is_logic(t_type type);
-
-// command_to_words.c
 t_word			*command_to_words(char *line);
-
-// init_add_word.c
 t_word			*init_add_word(char *line, int *i, int *j);
 t_word			*malloc_add(void);
-
-//init_seprator.c
 t_word			*init_seprator(char *line,int *index);
-
-// for_init_seprator.c
 t_word			*pipe_or_type(char *line, int *index);
 t_word			*and_type(char *line, int *index);
 t_word			*semidot_type(char *line, int *index);
 int				return_message(char *message, int re_value, int fd);
-
-//my_here_doc.c
 void			my_here_doc(char *line);
 int				inclu_heredoc(char *new_line);
-
-// here_doc_bse_word.c
-void			my_here_doc_word(t_word *list);
-
-//all_case_redirection.c
+char				**my_here_doc_word_init_pro_args(t_word *list);
 int				all_case_redirection(t_word *list);
-
-//less_case_redirection.c
 int				redi_less(t_word *list);
 int				redi_lessand(t_word *list);
 int			redi_lessandminus(t_word *list);
 int				err_open_file(t_word *list);
-
-//child_program.c
 void		child_pro_bin(char **paras, char **env, t_sh *table);
 void		do_child_pro(char **paras, char **env, t_sh *table);
 char		*path_in_sh(char *app, t_sh *table);
-
-//actions_each_line.c
 int			dslash_before(char *line, int index);
 void		print_list_word(t_word *list);
 void		actions_each_line(char ***env, t_word *list, t_sh *table);
-
-//actions_each_bloc.c
 int			actions_each_bloc(t_word *list, char ***env, t_sh *table);
-
-//helper_actiond_each_bloc.c
 int			nb_pipe_eachbloc(t_word *list);
-char		**args_each_exev(t_word *list, char **env);
+char		**args_each_exev(t_word *list);
 int			close_all_pipe(int *pipe_fd, int nb_pipe, int nb_pro); // didnt really used this func.
 int			do_all_redirection(t_word *list, int *pipe_fd, int nb_pipe, int nb_pro);
-
-//helper_actiond_each_bloc_2.c
 void		init_int_table(int *table, int len);
 void		do_all_pipe(int *pipe_fd, int nb_pipe);
 int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table);
-
-//helper_actiond_each_bloc_3.c
 int			first_buildin_no_pipe(int nb_pipe, t_word *list);
 int			valide_program(char **str, t_sh *table);
 int			put2_str_fd_return(char *str1, char *str2, int fd, int re_value);
 void		put2_str_fd(char *str1, char *str2, int fd);
-
-//recover_fd__buildin.c
 t_save_fd	*fd_restorage(t_word *list, t_save_fd *recover);
 void		recover_fd(t_save_fd *recover);
 void		free_saver_fd(t_save_fd *recover);
-
-//signal.c
 void		signal_inh(int sign);
-
-//my_free.c
 void		ft_freestrstr(char **cp_env);
 void		free_sh_table(t_sh *table, int index);
 void		free_pro_args(t_program *pro, int index);
 void		free_word_list(t_word *list);
-
-//helper.c
 t_table		*malloc_add_sh(void);
 int			replace_home(char *word, char **env);
 void		case_dquote_squote(t_helper *help, char *cp, char *word);
+void		put_strstr(char **str);
 #endif

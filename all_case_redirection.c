@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   all_case_redirection.c                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/28 23:07:16 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/28 23:15:30 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <fcntl.h>
 #include <unistd.h>
 #include "twenty_one.h"
@@ -15,10 +27,10 @@ int		redi_great(t_word *l)
 	if (tofd != -1)
 	{
 		if (dup2(tofd, fd) < 0)
-			return(return_message("dup2 failed\n", -1, 2));
+			return (return_message("dup2 failed\n", -1, 2));
 		if (close(tofd) < 0)
-			return(return_message("close file failed\n", -1, 2));
-			return (0);
+			return (return_message("close file failed\n", -1, 2));
+		return (0);
 	}
 	else
 		return (err_open_file(l));
@@ -37,10 +49,10 @@ int		redi_dgreat(t_word *l)
 	if (tofd != -1)
 	{
 		if (dup2(tofd, fd) < 0)
-			return(return_message("dup2 failed\n", -1, 2));
+			return (return_message("dup2 failed\n", -1, 2));
 		if (close(tofd) < 0)
-			return(return_message("close file failed\n", -1, 2));
-			return (0);
+			return (return_message("close file failed\n", -1, 2));
+		return (0);
 	}
 	else
 		return (err_open_file(l));
@@ -49,23 +61,22 @@ int		redi_dgreat(t_word *l)
 int		redi_greatand(t_word *l)
 {
 	int		fd;
-	int		tofd;
+	int		t;
 
+	fd = 1;
 	if (l->pre && l->pre->type == FD)
 		fd = ft_atoi(l->pre->word);
-	else
-		fd = 1;
 	if (l->next->type == FD)
-		tofd = ft_atoi(l->next->word);
+		t = ft_atoi(l->next->word);
 	else
-	tofd = open(l->next->word, O_CREAT | O_APPEND | O_RDWR, S_IWUSR | S_IRUSR);
-	if (tofd != -1)
+		t = open(l->next->word, O_CREAT | O_APPEND | O_RDWR, S_IWUSR | S_IRUSR);
+	if (t != -1)
 	{
-		if (dup2(tofd, fd) < 0)
-			return(return_message("dup2 failed\n", -1, 2));
-		if (close(tofd) < 0)
-			return(return_message("close file failed\n", -1, 2));
-			return (0);
+		if (dup2(t, fd) < 0)
+			return (return_message("dup2 failed\n", -1, 2));
+		if (close(t) < 0)
+			return (return_message("close file failed\n", -1, 2));
+		return (0);
 	}
 	else
 	{
@@ -84,9 +95,9 @@ int		redi_greatandminus(t_word *list)
 		fd = ft_atoi(list->pre->word);
 	else
 		fd = 1;
-		if (close(fd) < 0)
-			return (return_message("bad descriptor close failed\n", -1, 2));
-		return (0);
+	if (close(fd) < 0)
+		return (return_message("bad descriptor close failed\n", -1, 2));
+	return (0);
 }
 
 int		all_case_redirection(t_word *list)
@@ -94,7 +105,8 @@ int		all_case_redirection(t_word *list)
 	int		res;
 
 	res = 0;
-	while (list && !is_logic(list->type) && list->type != SEMI_DOT && list->type != PIPE)
+	while (list && !is_logic(list->type) && \
+			list->type != SEMI_DOT && list->type != PIPE)
 	{
 		if (list->type == GREAT)
 			res = redi_great(list);

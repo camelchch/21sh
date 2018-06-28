@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_in_cd.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/28 23:03:14 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/28 23:04:49 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <unistd.h>
 #include "twenty_one.h"
 
@@ -5,7 +17,6 @@ static void	init_tempwd(char **tempwd, int ct, char ***paras, char *path)
 {
 	(void)ct;
 	(void)paras;
-
 	tempwd[0] = "no real meaning here";
 	tempwd[1] = "OLDPWD";
 	tempwd[2] = getcwd(path, PATH_MAX + 1);
@@ -58,7 +69,7 @@ static void	for_cd(char *paras, char ***env, char **tempwd, char *path)
 	}
 }
 
-int		cd(char **paras, char ***env)
+int			cd(char **paras, char ***env)
 {
 	int		ct;
 	char	*tempwd[4];
@@ -70,11 +81,12 @@ int		cd(char **paras, char ***env)
 	if (ct == 2)
 		ft_strcpy(cp, paras[1]);
 	if (ct != 1 && ct != 2)
-		return(return_message("Too many arguments--usage : cd path\n", 1, 2));
+		return (return_message("Too many arguments--usage : cd path\n", 1, 2));
 	else
 	{
 		init_tempwd(tempwd, ct, &paras, path);
-		if (ct == 1 || (ct == 2 && (ft_strstr(*(paras + 1), "~") || !ft_strcmp(*(paras + 1), "-"))))
+		if (ct == 1 || (ct == 2 && ((paras + 1)[0][0] == '~' || \
+						!ft_strcmp(*(paras + 1), "-"))))
 			oldpwd_home(cp, env, ct);
 		if (ft_strlen(cp))
 			for_cd(cp, env, tempwd, path);

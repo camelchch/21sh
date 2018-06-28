@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:49:10 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:51:07 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:44:01 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static void		for_his_up(t_line *line)
 {
 	if (!line->last_his->pre)
 		line->his_mostup = 1;
-	if (line->up_indown  && !line->last_his->next)
+	if (line->up_indown && !line->last_his->next)
 		line->one_his = 1;
 }
 
@@ -47,7 +47,6 @@ int				history_up(t_line *line)
 	}
 	return (0);
 }
-
 
 static void		for_his_down(t_line *line)
 {

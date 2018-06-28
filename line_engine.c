@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:48:17 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:42:41 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ static void	init_for_engine(t_key *t, t_line *line)
 	init_for_enginie_2(t, line);
 }
 
-int		engine(t_line *line, unsigned long  key)
+int			engine(t_line *line, unsigned long key)
 {
 	int		i;
 	t_key	t[NB_KEY];

@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:50:31 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:50:55 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:54:23 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ int		move_nleft(t_line *line)
 {
 	while (line->pos > 0)
 		line->move_left(line);
-
 	return (0);
 }
 
@@ -47,9 +46,9 @@ int		mv_left_word(t_line *line)
 	int		left;
 
 	left = line->pos;
-	if(line->pos == line->buf_len)
+	if (line->pos == line->buf_len)
 		left = line->buf_len - 1;
-	if (line->pos != line->buf_len &&left && line->buf[left] != ' ' && \
+	if (line->pos != line->buf_len && left && line->buf[left] != ' ' && \
 			line->buf[left] != '\t' && (line->buf[left - 1] == ' ' \
 			|| line->buf[left - 1] == '\t'))
 		left--;

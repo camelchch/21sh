@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:46:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:46:32 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:05:38 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,9 @@ void		child_pro_bin(char **paras, char **env, t_sh *table)
 
 static void	child_pro_buildin(char **paras, char **env, t_sh *table)
 {
-
 	do_build(paras, &env, table);
 	if (ft_strcmp(*paras, "exit"))
-	exit(0);
+		exit(0);
 }
 
 void		do_child_pro(char **paras, char **env, t_sh *table)

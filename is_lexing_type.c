@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:40:01 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 15:40:13 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:38:04 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ int			is_seprator_w(char *line, int index)
 {
 	if (index < (int)ft_strlen(line))
 	{
-		if (line[index] == ' '  || line[index ] == '\t' || line[index] == '<')
+		if (line[index] == ' ' || line[index] == '\t' || line[index] == '<')
 			return (1);
 		if (line[index] == '&' && index + 1 < (int)ft_strlen(line) && \
 				line[index + 1] == '&')

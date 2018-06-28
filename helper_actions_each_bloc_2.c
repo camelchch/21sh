@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helper_actions_each_bloc_2.c                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/28 23:28:56 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/28 23:28:58 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 #include <unistd.h>
 #include "twenty_one.h"
@@ -32,7 +44,7 @@ int			pro_is_buildin_no_pipe(t_word *list, char ***env, t_sh *table)
 	recover = NULL;
 	pro_args = NULL;
 	recover = fd_restorage(list, recover);
-	pro_args = args_each_exev(list, *env);
+	pro_args = args_each_exev(list);
 	all_case_redirection(list);
 	do_build(pro_args, env, table);
 	recover_fd(recover);

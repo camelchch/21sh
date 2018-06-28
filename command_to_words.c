@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   command_to_words.c                                 :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/06/28 23:16:02 by saxiao            #+#    #+#             */
+/*   Updated: 2018/06/28 23:16:56 by saxiao           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "twenty_one.h"
 
 static int		only_nb_str(char *str)
@@ -32,7 +44,7 @@ static void		modif_type(t_word *last, t_word *add)
 			if (only_nb_str(add->word))
 				add->type = FD;
 			else
-				add->type = FILES;;
+				add->type = FILES;
 		}
 		else
 		{

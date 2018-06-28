@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:43:38 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/27 17:43:58 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/28 23:39:39 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@
 
 int			move_nright(t_line *line)
 {
-	while  (line->pos < line->buf_len)
+	while (line->pos < line->buf_len)
 		move_right(line);
 	return (0);
 }
 
 static void	for_delect_key(void)
 {
-			write(1, " ", 1);
-			tputs(tgetstr("le", 0), 1, my_putc);
-			tputs(tgetstr("nd", 0), 1, my_putc);
+	write(1, " ", 1);
+	tputs(tgetstr("le", 0), 1, my_putc);
+	tputs(tgetstr("nd", 0), 1, my_putc);
 }
 
 int			delete_key(t_line *l)
