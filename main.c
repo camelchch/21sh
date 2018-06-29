@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 12:19:33 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 23:53:33 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:51:17 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int			main(int ac, char **av, char **env)
 	all_path = path(cp_env);
 	init_shtable(table, all_path);
 	ft_freestrstr(all_path);
-	clc_get = 0;
+	g_clc = 0;
 	prompt(cp_env, table);
 	return (0);
 }

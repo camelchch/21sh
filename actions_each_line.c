@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/28 22:55:00 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 22:57:20 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:46:44 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ static void	actions_blocs(t_word *list, char ***env, t_sh *table)
 	t_word	*cp;
 
 	cp = list;
-	while (cp && !clc_get)
+	while (cp && !g_clc)
 	{
-		while (cp && !is_logic(cp->type) && cp->type != SEMI_DOT && !clc_get)
+		while (cp && !is_logic(cp->type) && cp->type != SEMI_DOT && !g_clc)
 		{
 			if (!remove_quoting_bloc(cp, *env))
 				actions_each_bloc(cp, env, table);

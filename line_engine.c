@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:47:13 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 23:42:41 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:52:36 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int			engine(t_line *line, unsigned long key)
 	{
 		if (line->buf_len == MAX_BUF - 1)
 		{
-			end_line = 1;
+			g_end_line = 1;
 			return (0);
 		}
 		line->printable(line, key);

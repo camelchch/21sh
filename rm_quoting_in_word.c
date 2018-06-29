@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:19:35 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/29 00:01:53 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:31:57 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 static void	init_vari_for(t_helper *help, char *cp, char *vari, char *word)
 {
-	open_dquote = -1;
-	open_squote = -1;
+	g_open_dquote = -1;
+	g_open_squote = -1;
 	help->i = -1;
 	help->k = 0;
 	help->index = 0;
@@ -27,12 +27,12 @@ static void	init_vari_for(t_helper *help, char *cp, char *vari, char *word)
 
 void		case_dquote(t_helper *help, char *cp, char *word)
 {
-	if (open_squote < 0)
+	if (g_open_squote < 0)
 	{
 		if (!dslash_before(cp, help->i))
 			word[help->index - 1] = '"';
 		else
-			open_dquote = -open_dquote;
+			g_open_dquote = -g_open_dquote;
 	}
 	else
 		word[help->index++] = '"';
@@ -40,12 +40,12 @@ void		case_dquote(t_helper *help, char *cp, char *word)
 
 void		case_squote(t_helper *help, char *cp, char *word)
 {
-	if (open_dquote < 0)
+	if (g_open_dquote < 0)
 	{
 		if (!dslash_before(cp, help->i))
 			word[help->index - 1] = '\'';
 		else
-			open_squote = -open_squote;
+			g_open_squote = -g_open_squote;
 	}
 	else
 		word[help->index++] = '\'';
@@ -53,11 +53,11 @@ void		case_squote(t_helper *help, char *cp, char *word)
 
 static void	other_case(t_helper *help, char *cp, char *word)
 {
-	if (open_dquote < 0 && open_squote < 0 && help->i - 1 >= 0 && \
+	if (g_open_dquote < 0 && g_open_squote < 0 && help->i - 1 >= 0 && \
 			cp[help->i - 1] == '\\' && dslash_before(cp, help->i - 1))
 		word[help->index - 1] = cp[help->i];
 	else if (!(cp[help->i] == '\\' && !dslash_before(cp, help->i) \
-				&& open_squote < 0))
+				&& g_open_squote < 0))
 		word[help->index++] = cp[help->i];
 }
 
@@ -73,7 +73,7 @@ int			remove_quoting_word(char *word, char **env)
 	init_vari_for(&help, cp, vari, word);
 	while (cp[++(help.i)])
 	{
-		if (open_squote < 0 && cp[help.i] == '$')
+		if (g_open_squote < 0 && cp[help.i] == '$')
 		{
 			dollor_sign(&help, cp, vari);
 			vari_value = ft_getenv(env, vari);

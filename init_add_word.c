@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:39:38 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 23:35:16 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:33:21 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ t_word		*malloc_add(void)
 
 static void	init_vari_for_add_word(t_word **add, int *only_nb, int *j)
 {
-	open_dquote = -1;
-	open_squote = -1;
+	g_open_dquote = -1;
+	g_open_squote = -1;
 	*add = NULL;
 	*only_nb = 1;
 	*j = 0;
@@ -45,10 +45,10 @@ static void	change(char *line, int *i, int *only_nb)
 {
 	if (line[*i] < '0' || line[*i] > '9')
 		*only_nb = 0;
-	if (line[*i] == '"' && dslash_before(line, *i) && open_squote < 0)
-		open_dquote = -open_dquote;
-	if (line[*i] == '\'' && dslash_before(line, *i) && open_dquote < 0)
-		open_dquote = -open_squote;
+	if (line[*i] == '"' && dslash_before(line, *i) && g_open_squote < 0)
+		g_open_dquote = -g_open_dquote;
+	if (line[*i] == '\'' && dslash_before(line, *i) && g_open_dquote < 0)
+		g_open_dquote = -g_open_squote;
 }
 
 t_word		*init_add_word(char *line, int *i, int *j)
@@ -57,13 +57,13 @@ t_word		*init_add_word(char *line, int *i, int *j)
 	int		only_nb;
 
 	init_vari_for_add_word(&add, &only_nb, j);
-	if (open_dquote < 0 && open_squote < 0 && *i < (int)ft_strlen(line) &&\
+	if (g_open_dquote < 0 && g_open_squote < 0 && *i < (int)ft_strlen(line) &&\
 			is_seprator_w(line, *i))
 		return (init_seprator(line, i));
 	else
 	{
 		add = malloc_add();
-		while ((open_dquote > 0 || open_squote > 0 ||\
+		while ((g_open_dquote > 0 || g_open_squote > 0 ||\
 					!is_seprator_w(line, *i)) && *i < (int)ft_strlen(line))
 		{
 			change(line, i, &only_nb);

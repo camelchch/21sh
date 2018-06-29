@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:47:19 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 23:02:26 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 11:51:46 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ int				actions_each_bloc(t_word *list, char ***env, t_sh *table)
 		return (pro_is_buildin_no_pipe(list, env, table));
 	init_for_each_bloc(pro, MAX_BUF, nb_pid, pipe_fd);
 	do_all_pipe(pipe_fd, nb_pipe);
-	while (list && !is_logic(list->type) && list->type != SEMI_DOT && !clc_get)
+	while (list && !is_logic(list->type) && list->type != SEMI_DOT && !g_clc)
 	{
 		if (!(pro[++i].pro_args = my_here_doc_word_init_pro_args(list)))
 			return (0);

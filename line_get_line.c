@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 15:48:30 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/29 00:06:42 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 13:46:39 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void					init_line(char *prompt, t_line *line)
 	line->his_mostup = 0;
 	line->up_indown = 0;
 	line->one_his = 0;
-	line->last_his = history;
+	line->last_his = g_history;
 	for_init_line(line);
 }
 
@@ -76,20 +76,24 @@ int						get_line(char *prompt, char *new_line, t_line *line)
 	char			*ligne;
 
 	ligne = NULL;
-	end_line = 0;
-	clc_get ? clc_get = 0 : ft_printf("%s", prompt);
+	g_end_line = 0;
+	g_clc ? g_clc = 0 : ft_printf("%s", prompt);
 	if (init_attr(SETNEW) == 0)
 	{
-		with_termcap = 1;
+		g_with_termcap = 1;
 		init_line(prompt, line);
-		while (((key = (int)get_key()) && key != '\n') && !clc_get && !end_line)
+		while (((key = (int)get_key()) && key != '\n') && !g_clc && !g_end_line)
+		{
+			if (key == CONTRL_C)
+				return (ctrl_c(line));
 			line->engine(line, key);
+		}
 		init_attr(SETOLD);
 		ft_strcpy(new_line, (const char *)line->buf);
 	}
 	else
 	{
-		with_termcap = 0;
+		g_with_termcap = 0;
 		if (get_next_line(1, &ligne) == 0)
 			exit(0);
 		if (ligne)

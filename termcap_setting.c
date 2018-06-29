@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:30:47 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/29 00:04:01 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 12:43:54 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static void	default_termi_mode(void)
 static void	for_attr(struct termios *new, struct termios old)
 {
 	*new = old;
-	new->c_lflag &= ~(ECHO | ICANON);
-	new->c_lflag |= ISIG;
+	new->c_lflag &= ~(ECHO | ICANON | ISIG);
+//	new->c_lflag |= ISIG;
 	new->c_oflag &= ~(OPOST);
 	new->c_cc[VMIN] = 1;
 	new->c_cc[VTIME] = 0;

@@ -6,7 +6,7 @@
 #    By: fsabatie <fsabatie@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/06 21:06:58 by fsabatie          #+#    #+#              #
-#    Updated: 2018/06/27 11:49:00 by saxiao           ###   ########.fr        #
+#    Updated: 2018/06/29 11:53:17 by saxiao           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 .PHONY: all clean fclean re
 
 # Defining variables
-NAME = minishell
+NAME = 21sh
 
 #SRC_PATH = srcs
 #INC_PATH = includes
@@ -63,7 +63,7 @@ $(NAME):
 	@cd $(LIB_PATH) && make re
 	@echo " ${GREEN}Done."
 	@cd ..
-	@echo "${GREEN}Compiling minishell" | tr -d '\n'
+	@echo "${GREEN}Compiling 21sh" | tr -d '\n'
 	@gcc -c $(GPPFLAGS) $(SRC)
 	@gcc $(CPPFLAGS) $(OBJ) $(LIBFT) $(PRINTF) -o $(NAME)
 	@echo " ${GREEN}Done."

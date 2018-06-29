@@ -6,7 +6,7 @@
 /*   By: saxiao <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/06/27 17:15:49 by saxiao            #+#    #+#             */
-/*   Updated: 2018/06/28 23:55:25 by saxiao           ###   ########.fr       */
+/*   Updated: 2018/06/29 13:32:33 by saxiao           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,22 +54,28 @@ int			prompt(char **env, t_sh *table)
 	t_history			*add;
 	t_word				*list;
 
-	ft_strcpy(temp_file, "./42sh_tmp.c");
+	ft_bzero(g_temp_file, MAX_BUF);
+	ft_strcpy(g_temp_file, "./42sh_tmp.c");
 	while (42)
 	{
-		ft_bzero(new_line, MAX_BUF);
-		get_line("$> ", new_line, &a_line);
-		if (with_termcap)
+		ft_bzero(g_new_line, MAX_BUF);
+		get_line("$> ",g_new_line, &g_line);
+		if (!g_clc)
+		{
+		if (g_with_termcap && !g_clc)
 			ft_printf("\n");
-		if (not_empty(new_line))
+		if (not_empty(g_new_line))
 		{
 			add = malloc(sizeof(t_history));
-			prompt_open_quote(new_line);
-			init_add(add, new_line);
-			add_history(&history, add);
-			list = command_to_words(new_line);
+			init_add(add, g_new_line);
+			add_history(&g_history, add);
+			if (!prompt_open_quote(g_new_line))
+			{
+			list = command_to_words(g_new_line);
 			actions_each_line(&env, list, table);
 			free_word_list(list);
+			}
+		}
 		}
 	}
 	return (0);
